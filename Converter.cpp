@@ -4,10 +4,9 @@
 
 #include "Converter.h"
 #include <stack>
-#include <algorithm>
+#include <stdexcept>
 
 Converter::Converter(string infix) {
-    infix.erase(remove(infix.begin(), infix.end(), ' '), infix.end());
     this->infix = infix;
     validate();
 }
@@ -25,10 +24,17 @@ void Converter::rpnStep(int &i) {
     for(;i<infix.size();i++){
         if(isdigit(infix[i])){
             string tmp = "";
-            while(isdigit(infix[i])){
+            while(isdigit(infix[i]) || infix[i]=='.'){
                 tmp += infix[i];
                 i++;
             }
+            try {   //check if valid double value
+                stod(tmp);
+            }
+            catch (invalid_argument &e) {
+                throw "Invalid number format!";
+            }
+
             rpn.push_back(tmp);
             i--;
             continue;
@@ -123,3 +129,4 @@ void Converter::validate() {
 bool Converter::isOperator(char a) {
     return (a=='*' || a=='/' || a=='+' || a=='-' || a=='^');
 }
+
