@@ -3,8 +3,8 @@
 //
 
 #include "Converter.h"
+#include "Math.h"
 #include <stack>
-#include <stdexcept>
 
 Converter::Converter(string infix) {
     this->infix = infix;
@@ -20,7 +20,7 @@ vector<string> Converter::toRPN() {
 }
 
 void Converter::rpnStep(int &i) {
-    stack <char> stos;
+    stack <string> stos;
     for(;i<infix.size();i++){
         if(isdigit(infix[i])){
             string tmp = "";
@@ -32,7 +32,7 @@ void Converter::rpnStep(int &i) {
                 stod(tmp);
             }
             catch (invalid_argument &e) {
-                throw "Invalid number format!";
+                throw string("Invalid number format!");
             }
 
             rpn.push_back(tmp);
@@ -45,21 +45,25 @@ void Converter::rpnStep(int &i) {
                 tmp += infix[i];
                 i++;
             }
-            rpn.push_back(tmp);
+            if(Math::isFunction(tmp)){
+                stos.push(tmp);
+            }
+            else {
+                rpn.push_back(tmp);
+            }
             i--;
             continue;
         }
         if(infix[i]=='!'){
             rpn.push_back("!");
         }
-        if(isOperator(infix[i])){
-            while(!stos.empty() && operatorPrio(stos.top())>=operatorPrio(infix[i])){
-                string tmp = " ";
-                tmp[0] = stos.top();
+        if(Math::isOperator(infix[i])){
+            while(!stos.empty() && Math::operatorPrio(stos.top())>=Math::operatorPrio(infix.substr(i, 1))){
+                string tmp = stos.top();
                 rpn.push_back(tmp);
                 stos.pop();
             }
-            stos.push(infix[i]);
+            stos.push(infix.substr(i, 1));
         }
         if(infix[i]=='('){
             i++;
@@ -67,8 +71,7 @@ void Converter::rpnStep(int &i) {
         }
         else if(infix[i]==')'){
             while(!stos.empty()){
-                string tmp = " ";
-                tmp[0] = stos.top();
+                string tmp = stos.top();
                 rpn.push_back(tmp);
                 stos.pop();
             }
@@ -76,29 +79,9 @@ void Converter::rpnStep(int &i) {
         }
     }
     while(!stos.empty()){
-        string tmp = " ";
-        tmp[0] = stos.top();
+        string tmp = stos.top();
         rpn.push_back(tmp);
         stos.pop();
-    }
-}
-
-int Converter::operatorPrio(char a) {
-    switch(a){
-        case '^':
-            return 3;
-        case '*':
-            return 2;
-        case '/':
-            return 2;
-        case '+':
-            return 1;
-        case '-':
-            return 1;
-        case '(':
-            return 0;
-        default:
-            return -1;
     }
 }
 
@@ -107,7 +90,7 @@ void Converter::validate() {
     char prev = infix[0];
 
     if(infix[0]=='!')
-        throw "Operators error!";
+        throw string("Operators error!");
 
     for(char a: infix){
         if(a == '(')
@@ -115,18 +98,13 @@ void Converter::validate() {
         if(a == ')')
             nested--;
         if(nested < 0)
-            throw "Bad brackets nesting!";
-        if(isOperator(a) && isOperator(prev))
-            throw "Operators error!";
+            throw string("Bad brackets nesting!");
+        if(Math::isOperator(a) && Math::isOperator(prev))   //todo check order for factorial
+            throw string("Operators error!");
 
         prev = a;
     }
 
     if(nested != 0)
-        throw "Bad brackets nesting!";
+        throw string("Bad brackets nesting!");
 }
-
-bool Converter::isOperator(char a) {
-    return (a=='*' || a=='/' || a=='+' || a=='-' || a=='^');
-}
-

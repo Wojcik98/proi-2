@@ -13,17 +13,14 @@ using namespace std;
 
 class Variable {
 public:
-    Variable(string name, map <string, Variable*> *vars);
+    Variable(map<string, Variable *> *vars);
 
-    void setExp(vector <string> exp);
+    void setExpression(vector<string> exp);
     double value();
 private:
-    typedef double (*ScriptFunction)(double);
-
+    bool isUsed;
     vector <string> expression;
     map <string, Variable*> *vars;
-    map <string, ScriptFunction> funcs;
-    string name;
 };
 
 

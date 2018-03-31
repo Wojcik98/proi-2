@@ -12,7 +12,7 @@ using namespace std;
 
 class Converter {
 public:
-    Converter(string infix);
+    explicit Converter(string infix);
     vector<string> toRPN();
 
 private:
@@ -20,8 +20,6 @@ private:
     vector<string> rpn;
     void rpnStep(int &i);
     void validate();
-    bool isOperator(char a);
-    int operatorPrio(char a);
 };
 
 
