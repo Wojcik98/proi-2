@@ -5,18 +5,20 @@
 #include "Converter.h"
 #include "Math.h"
 #include <stack>
+#include <algorithm>
 
 Converter::Converter(string infix) {
     this->infix = infix;
+    clean();
     validate();
 }
 
-vector<string> Converter::toRPN() {
+pair<string, vector<string>> Converter::toRPN() {
     rpn.clear();
     int i=0;
     rpnStep(i);
 
-    return rpn;
+    return make_pair(varToAssign, rpn);
 }
 
 void Converter::rpnStep(int &i) {
@@ -54,9 +56,9 @@ void Converter::rpnStep(int &i) {
             i--;
             continue;
         }
-        if(infix[i]=='!'){
+        /*if(infix[i]=='!'){
             rpn.push_back("!");
-        }
+        }*/
         if(Math::isOperator(infix[i])){
             while(!stos.empty() && Math::operatorPrio(stos.top())>=Math::operatorPrio(infix.substr(i, 1))){
                 string tmp = stos.top();
@@ -78,10 +80,34 @@ void Converter::rpnStep(int &i) {
             return;
         }
     }
+
     while(!stos.empty()){
         string tmp = stos.top();
         rpn.push_back(tmp);
         stos.pop();
+    }
+}
+
+void Converter::clean() {
+    infix.erase(
+            remove(infix.begin(), infix.end(), ' '),
+            infix.end()
+    );
+
+    size_t eqPos = infix.find('=');
+    size_t nonAlphaPos = infix.find_first_not_of("abcdefghijklmnopqrstuvwxyz");
+    size_t nextEqPos = infix.find('=', eqPos+1);
+    if(eqPos!=string::npos){    //then nonAlphaPos is also not npos
+        if(eqPos==nonAlphaPos && nextEqPos==string::npos) {
+            varToAssign = infix.substr(0, eqPos);
+            infix.erase(0, eqPos+1);
+        }
+        else{
+            throw string("Invalid assignment!");
+        }
+    }
+    else{
+        varToAssign = "ans";
     }
 }
 

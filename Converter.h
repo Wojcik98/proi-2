@@ -7,19 +7,22 @@
 
 #include <string>
 #include <vector>
+#include <utility>
 
 using namespace std;
 
 class Converter {
 public:
     explicit Converter(string infix);
-    vector<string> toRPN();
+    pair<string, vector<string>> toRPN();
 
 private:
     string infix;
     vector<string> rpn;
+    string varToAssign;
     void rpnStep(int &i);
     void validate();
+    void clean();
 };
 
 

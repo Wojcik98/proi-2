@@ -5,7 +5,6 @@
 #include "Variable.h"
 #include "Math.h"
 #include <stack>
-#include <iostream>
 
 using namespace std;
 

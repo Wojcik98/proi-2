@@ -1,5 +1,5 @@
 //
-// Created by chiemsee on 30.03.18.
+// Created by Wojcik98 on 30.03.18.
 //
 
 #ifndef INC_2PRJ_MATH_H

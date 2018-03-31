@@ -1,9 +1,8 @@
 //
-// Created by chiemsee on 30.03.18.
+// Created by Wojcik98 on 30.03.18.
 //
 
 #include <cmath>
-#include <iostream>
 #include "Math.h"
 
 map<string, Math::ScriptFunction> Math::funcs = {
@@ -22,7 +21,7 @@ bool Math::isFunction(string a) {
 
 double Math::factorial(double a) {
     double result = 1.;
-    for(int i=1;i<a;i++) {
+    for(int i=1;i<=a;i++) {
         result *= i;
     }
 
@@ -53,8 +52,7 @@ double Math::function(string fun, double x) {
 
 
 int Math::operatorPrio(string a) {
-    cout<<a;
-    if(Math::isFunction(a)){
+    if(Math::isFunction(a) || a=="!"){
         return 4;
     }
     else if(a=="^"){
