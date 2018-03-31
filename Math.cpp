@@ -54,7 +54,10 @@ double Math::function(string fun, double x) {
 
 int Math::operatorPrio(string a) {
     cout<<a;
-    if(a=="^"){
+    if(Math::isFunction(a)){
+        return 4;
+    }
+    else if(a=="^"){
         return 3;
     }
     else if(a=="*" || a=="/"){
