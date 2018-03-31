@@ -33,9 +33,10 @@ int main() {
         catch (const string &e) {
             cout << e << endl;
         }
-        /*for(string a: rpn)
-            cout << a << " ";
-        cout << endl;*/
+    }
+
+    for(auto it: vars){
+        delete it.second;
     }
 
     return 0;
