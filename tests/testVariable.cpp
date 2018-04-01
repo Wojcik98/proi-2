@@ -15,6 +15,10 @@
 
 using namespace std;
 
+/**
+ * @brief testVariable::testEvaluation
+ * Tests if correct equations are evaluated properly.
+ */
 void testVariable::testEvaluation() {
     map <string, Variable*> vars;
     vars["ans"] = new Variable(&vars);
@@ -41,6 +45,10 @@ void testVariable::testEvaluation() {
     assert(FEQUAL(vars[tmp5.first]->value(), 27.));
 }
 
+/**
+ * @brief testVariable::testUnknownVariable
+ * Tests if equations with unknown variable cause exception.
+ */
 void testVariable::testUnknownVariable() {
     map <string, Variable*> vars;
     vars["ans"] = new Variable(&vars);
@@ -57,6 +65,10 @@ void testVariable::testUnknownVariable() {
     assert(caught);
 }
 
+/**
+ * @brief testVariable::testSelfreferencing
+ * Tests if self-referencing equations cause exception.
+ */
 void testVariable::testSelfreferencing() {
     map <string, Variable*> vars;
     vars["ans"] = new Variable(&vars);

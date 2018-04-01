@@ -6,6 +6,10 @@
 #include "testConverter.h"
 #include "../Converter.h"
 
+/**
+ * @brief testConverter::testCorrect
+ * Tests if correct equations are converted properly.
+ */
 void testConverter::testCorrect(){
     pair<string, vector<string>> extracted = Converter("2+2*7").toRPN();
     assert(extracted.first == "ans");
@@ -32,6 +36,10 @@ void testConverter::testCorrect(){
     assert(extracted3.second[4]=="*");
 }
 
+/**
+ * @brief testConverter::testEmpty
+ * Tests if empty equation causes exception.
+ */
 void testConverter::testEmpty(){
     bool caught = false;
     try {
@@ -43,6 +51,10 @@ void testConverter::testEmpty(){
     assert(caught);
 }
 
+/**
+ * @brief testConverter::testSpaces
+ * Tests if spaces are removed properly.
+ */
 void testConverter::testSpaces(){
     pair<string, vector<string>> extracted = Converter("  2 +2   *7 ").toRPN();
     assert(extracted.first == "ans");
@@ -53,6 +65,10 @@ void testConverter::testSpaces(){
     assert(extracted.second[4]=="+");
 }
 
+/**
+ * @brief testConverter::testInvalidBrackets
+ * Tests if invalid brackets cause exception.
+ */
 void testConverter::testInvalidBrackets(){
     bool caught = false;
 
@@ -83,6 +99,10 @@ void testConverter::testInvalidBrackets(){
     assert(caught);
 }
 
+/**
+ * @brief testConverter::testInvalidAssignment
+ * Tests if multiple assignment signs cause exception.
+ */
 void testConverter::testInvalidAssignment(){
     bool caught = false;
 
@@ -104,6 +124,10 @@ void testConverter::testInvalidAssignment(){
     assert(caught);
 }
 
+/**
+ * @brief testConverter::testOperators
+ * Tests operators priority and if invalid placement causes exception.
+ */
 void testConverter::testOperators(){
     pair<string, vector<string>> extracted = Converter("ln1*2/exp3+log4^5-6!").toRPN();
     assert(extracted.second[0]=="1");

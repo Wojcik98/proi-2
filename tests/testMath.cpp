@@ -9,6 +9,10 @@
 
 #define FEQUAL(a, b) (fabs((a)-(b))<0.0000001)
 
+/**
+ * @brief testMath::testOperators
+ * Tests if methods related to operators work properly.
+ */
 void testMath::testOperators() {
     assert(Math::isOperator('+'));
     assert(Math::isOperator('-'));
@@ -30,6 +34,10 @@ void testMath::testOperators() {
     assert(Math::operatorPrio("+") == Math::operatorPrio("-"));
 }
 
+/**
+ * @brief testMath::testFunctions
+ * Tests if methods related to functions work properly.
+ */
 void testMath::testFunctions() {
     assert(Math::isFunction("ln"));
     assert(Math::isFunction("log"));
