@@ -20,7 +20,7 @@ private:
     string infix;
     vector<string> rpn;
     string varToAssign;
-    void rpnStep(int &i);
+    void rpnStep(unsigned int &i);
     void validate();
     void clean();
 };

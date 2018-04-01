@@ -44,6 +44,7 @@ double Math::operation(double x, double y, string op) {
     else if(op=="^"){
         return pow(x, y);
     }
+    return 0.;
 }
 
 double Math::function(string fun, double x) {

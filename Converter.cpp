@@ -15,13 +15,13 @@ Converter::Converter(string infix) {
 
 pair<string, vector<string>> Converter::toRPN() {
     rpn.clear();
-    int i=0;
+    unsigned int i=0;
     rpnStep(i);
 
     return make_pair(varToAssign, rpn);
 }
 
-void Converter::rpnStep(int &i) {
+void Converter::rpnStep(unsigned int &i) {
     stack <string> stos;
     for(;i<infix.size();i++){
         if(isdigit(infix[i])){
