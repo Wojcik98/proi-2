@@ -112,6 +112,10 @@ void Converter::clean() {
 }
 
 void Converter::validate() {
+    if(infix.empty()){
+        throw string("Empty line!");
+    }
+
     int nested = 0;
     char prev = infix[0];
 

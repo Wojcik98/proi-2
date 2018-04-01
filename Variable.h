@@ -13,10 +13,11 @@ using namespace std;
 
 class Variable {
 public:
-    Variable(map<string, Variable *> *vars);
+    explicit Variable(map<string, Variable *> *vars);
 
     void setExpression(vector<string> exp);
     double value();
+
 private:
     bool isUsed;
     vector <string> expression;

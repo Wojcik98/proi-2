@@ -19,6 +19,10 @@ int main() {
     string varToAssign;
 
     while(getline(cin, equation)){
+        if(equation == "exit"){
+            break;
+        }
+
         try {
             pair<string, vector<string>> extracted = Converter(equation).toRPN();
             varToAssign = extracted.first;

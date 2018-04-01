@@ -20,6 +20,7 @@ void Variable::setExpression(vector<string> exp) {
 double Variable::value() {
     stack <string> stos;
     if(isUsed){
+        isUsed = false;
         throw string("Error: self-referencing equation!");
     }
     else{
@@ -52,8 +53,14 @@ double Variable::value() {
         }
         else{
             if(vars->find(a)!=vars->end()){
-                double tmp = (*vars)[a]->value();
-                stos.push(to_string(tmp));
+                try {
+                    double tmp = (*vars)[a]->value();
+                    stos.push(to_string(tmp));
+                }
+                catch (string &e) {
+                    isUsed = false;
+                    throw string(e);
+                }
             }
             else{
                 try{
@@ -61,7 +68,8 @@ double Variable::value() {
                     stos.push(to_string(tmp));
                 }
                 catch (const invalid_argument &e){
-                    throw string("Unknown value") + a;
+                    isUsed = false;
+                    throw string("Unknown value ") + a;
                 }
 
             }
