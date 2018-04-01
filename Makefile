@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-g -std=c++11 -Wall
 BIN=calc
-TESTDIR=test
+TESTBIN=test.out
 
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:%.cpp=%.o)
@@ -17,11 +17,13 @@ all: $(OBJ)
 
 clean:
 	rm -f *.o
-	rm $(BIN)
+	rm -f tests/*.o
+	rm -f $(BIN)
+	rm -f $(TESTBIN)
 
 test: $(TESTOBJ) Converter.o Variable.o Math.o
-	$(CXX) -o test.out $^
-	@./test.out
+	$(CXX) -o $(TESTBIN) $^
+	@./$(TESTBIN)
 
 run: all
 	@./$(BIN)
