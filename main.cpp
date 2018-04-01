@@ -1,8 +1,6 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <map>
-#include <stack>
 
 #include "Converter.h"
 #include "Variable.h"

@@ -65,9 +65,6 @@ int Math::operatorPrio(string a) {
     else if(a=="+" || a=="-"){
         return 1;
     }
-    else if(a=="("){
-        return 0;
-    }
     else{
         return -1;
     }
