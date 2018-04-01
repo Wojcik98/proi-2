@@ -128,7 +128,7 @@ void Converter::validate() {
     }
 
     int nested = 0;
-    char prev = infix[0];
+    char prev = infix[0];   //it will also check if first symbol is operator
 
     if(infix[0]=='!')
         throw string("Operators error!");
@@ -140,14 +140,19 @@ void Converter::validate() {
             nested--;
         if(nested < 0)
             throw string("Bad brackets nesting!");
-        if(Math::isOperator(a) && Math::isOperator(prev))   //todo check order for factorial
+        if(Math::isOperator(a) && Math::isOperator(prev) && prev != '!')
             throw string("Operators error!");
 
         prev = a;
     }
 
-    if(nested != 0)
+    if(Math::isOperator(infix[infix.size()-1]) && infix[infix.size()-1] != '!') {
+        throw string("Operators error!");
+    }
+
+    if(nested != 0) {
         throw string("Bad brackets nesting!");
+    }
 
     size_t eqPos = infix.find('=');
     size_t nonAlphaPos = infix.find_first_not_of("abcdefghijklmnopqrstuvwxyz");

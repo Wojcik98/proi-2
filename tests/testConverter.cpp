@@ -120,4 +120,13 @@ void testConverter::testOperators(){
     assert(extracted.second[11]=="+");
     assert(extracted.second[12]=="6");
     assert(extracted.second[13]=="!");
+
+    bool caught = false;
+    try {
+        pair<string, vector<string>> extracted2 = Converter("2+").toRPN();
+    }
+    catch (const string &e) {
+        caught = true;
+    }
+    assert(caught);
 }
