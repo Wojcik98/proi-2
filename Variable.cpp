@@ -8,15 +8,32 @@
 
 using namespace std;
 
+/**
+ * @brief Variable::Variable
+ * @param vars
+ * Constructor.
+ */
 Variable::Variable(map<string, Variable *> *vars) {
     this->vars = vars;
     this->isUsed = false;
 }
 
+/**
+ * @brief Variable::setExpression
+ * @param exp
+ * Sets variable's expression to exp.
+ */
 void Variable::setExpression(vector<string> exp) {
     this->expression = exp;
 }
 
+/**
+ * @brief Variable::value
+ * @return evaluated value of variable
+ * @throws exception if variable is used in its own expression (even if it's used indirectly in other variables)
+ * @throws exception if unknown value is used (e.g. uninitialized variable)
+ * Constructor
+ */
 double Variable::value() {
     stack <string> stos;
     if(isUsed){
