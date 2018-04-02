@@ -109,7 +109,7 @@ void Converter::rpnStep(unsigned int &i) {
  */
 void Converter::clean() {
     infix.erase(
-            remove(infix.begin(), infix.end(), ' '),
+            remove_if(infix.begin(), infix.end(), Converter::isInvalidChar),
             infix.end()
     );
 }
@@ -161,6 +161,10 @@ void Converter::validate() {
         if(eqPos==nonAlphaPos && nextEqPos==string::npos) {
             varToAssign = infix.substr(0, eqPos);
             infix.erase(0, eqPos+1);
+
+            if(infix.empty()){  //assigned value must not be empty
+                throw string("Empty assignment!");
+            }
         }
         else{
             throw string("Invalid assignment!");
@@ -169,4 +173,8 @@ void Converter::validate() {
     else{
         varToAssign = "ans";
     }
+}
+
+bool Converter::isInvalidChar(char a) {
+    return !(Math::isOperator(a) || isalnum(a) || a=='.' || a=='=' || a=='(' || a==')');
 }

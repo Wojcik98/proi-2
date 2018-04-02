@@ -20,8 +20,8 @@ int main(){
     testConverter::testCorrect();
     cout << "Running testConverter::testEmpty..." << endl;
     testConverter::testEmpty();
-    cout << "Running testConverter::testSpaces..." << endl;
-    testConverter::testSpaces();
+    cout << "Running testConverter::testInvalidCharacters..." << endl;
+    testConverter::testInvalidCharacters();
     cout << "Running testConverter::testInvalidBrackets..." << endl;
     testConverter::testInvalidBrackets();
     cout << "Running testConverter::testInvalidAssignment..." << endl;

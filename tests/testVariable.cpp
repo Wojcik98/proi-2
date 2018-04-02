@@ -67,7 +67,7 @@ void testVariable::testUnknownVariable() {
 
 /**
  * @brief testVariable::testSelfreferencing
- * Tests if self-referencing equations cause exception.
+ * Tests if self-referencing equations (maybe
  */
 void testVariable::testSelfreferencing() {
     map <string, Variable*> vars;

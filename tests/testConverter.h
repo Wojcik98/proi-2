@@ -10,7 +10,7 @@ class testConverter {
 public:
     static void testCorrect();
     static void testEmpty();
-    static void testSpaces();
+    static void testInvalidCharacters();
     static void testInvalidBrackets();
     static void testInvalidAssignment();
     static void testOperators();

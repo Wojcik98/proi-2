@@ -23,6 +23,7 @@ private:
     void rpnStep(unsigned int &i);
     void validate();
     void clean();
+    static bool isInvalidChar(char a);
 };
 
 

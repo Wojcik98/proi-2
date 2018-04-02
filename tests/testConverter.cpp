@@ -49,14 +49,23 @@ void testConverter::testEmpty(){
         caught = true;
     }
     assert(caught);
+
+    caught = false;
+    try {
+        pair<string, vector<string>> extracted = Converter("a=  ").toRPN();
+    }
+    catch (const string &e) {
+        caught = true;
+    }
+    assert(caught);
 }
 
 /**
  * @brief testConverter::testSpaces
- * Tests if spaces are removed properly.
+ * Tests if invalid characters are removed properly.
  */
-void testConverter::testSpaces(){
-    pair<string, vector<string>> extracted = Converter("  2 +2   *7 ").toRPN();
+void testConverter::testInvalidCharacters(){
+    pair<string, vector<string>> extracted = Converter(" < 2 +\t2  ? *7{ ] ").toRPN();
     assert(extracted.first == "ans");
     assert(extracted.second[0]=="2");
     assert(extracted.second[1]=="2");
