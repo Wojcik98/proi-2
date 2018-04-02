@@ -10,7 +10,7 @@ using namespace std;
 
 /**
  * @brief Variable::Variable
- * @param vars
+ * @param vars available variables
  * Constructor.
  */
 Variable::Variable(map<string, Variable *> *vars) {
@@ -20,7 +20,7 @@ Variable::Variable(map<string, Variable *> *vars) {
 
 /**
  * @brief Variable::setExpression
- * @param exp
+ * @param exp expression to be set
  * Sets variable's expression to exp.
  */
 void Variable::setExpression(vector<string> exp) {

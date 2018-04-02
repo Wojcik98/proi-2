@@ -30,10 +30,10 @@ int main() {
             }
             vars[varToAssign]->setExpression(rpn);
             double value = vars[varToAssign]->value();
-            cout << varToAssign << " = " << value << endl;
+            cout << "> " << varToAssign << " = " << value << endl;
         }
         catch (const string &e) {
-            cout << e << endl;
+            cout << "> " << e << endl;
         }
     }
 

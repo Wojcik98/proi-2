@@ -72,8 +72,8 @@ double Math::operation(double x, double y, string op) {
 
 /**
  * @brief Math::function
- * @param fun
- * @param x
+ * @param fun function to use
+ * @param x parameter to use in function
  * @return value of function fun with parameter x
  * Computes fun(x), e.g. for fun=log,x=10 it returns log(10).
  */
@@ -83,7 +83,7 @@ double Math::function(string fun, double x) {
 
 /**
  * @brief Math::operatorPrio
- * @param a
+ * @param a operator or function that we want to know priority of
  * @return priority of a
  * Returns prority of a to compare them, e.g. * has higher priority than +
  */

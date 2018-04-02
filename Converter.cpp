@@ -9,7 +9,7 @@
 
 /**
  * @brief Converter::Converter
- * @param infix
+ * @param infix equation in infix form
  * Constructor.
  */
 Converter::Converter(string infix) {
