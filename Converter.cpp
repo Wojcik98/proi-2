@@ -127,6 +127,26 @@ void Converter::validate() {
         throw string("Empty line!");
     }
 
+    size_t eqPos = infix.find('=');
+    size_t nonAlphaPos = infix.find_first_not_of("abcdefghijklmnopqrstuvwxyz");
+    size_t nextEqPos = infix.find('=', eqPos+1);
+    if(eqPos!=string::npos){    //then nonAlphaPos is also not npos
+        if(eqPos==nonAlphaPos && nextEqPos==string::npos) {
+            varToAssign = infix.substr(0, eqPos);
+            infix.erase(0, eqPos+1);
+
+            if(infix.empty()){  //assigned value must not be empty
+                throw string("Empty assignment!");
+            }
+        }
+        else{
+            throw string("Invalid assignment!");
+        }
+    }
+    else{
+        varToAssign = "ans";
+    }
+
     int nested = 0;
     char prev = infix[0];   //it will also check if first symbol is operator
 
@@ -152,26 +172,6 @@ void Converter::validate() {
 
     if(nested != 0) {
         throw string("Bad brackets nesting!");
-    }
-
-    size_t eqPos = infix.find('=');
-    size_t nonAlphaPos = infix.find_first_not_of("abcdefghijklmnopqrstuvwxyz");
-    size_t nextEqPos = infix.find('=', eqPos+1);
-    if(eqPos!=string::npos){    //then nonAlphaPos is also not npos
-        if(eqPos==nonAlphaPos && nextEqPos==string::npos) {
-            varToAssign = infix.substr(0, eqPos);
-            infix.erase(0, eqPos+1);
-
-            if(infix.empty()){  //assigned value must not be empty
-                throw string("Empty assignment!");
-            }
-        }
-        else{
-            throw string("Invalid assignment!");
-        }
-    }
-    else{
-        varToAssign = "ans";
     }
 }
 
